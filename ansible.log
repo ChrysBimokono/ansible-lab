@@ -858,3 +858,129 @@ The offending line appears to be:
 2023-05-14 21:59:51,070 p=3401 u=ec2-user n=ansible | changed: [3.84.253.97]
 2023-05-14 21:59:51,122 p=3401 u=ec2-user n=ansible | PLAY RECAP ***************************************************************************************************************
 2023-05-14 21:59:51,123 p=3401 u=ec2-user n=ansible | 3.84.253.97                : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-05-15 00:06:34,415 p=4066 u=ec2-user n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  did not find expected '-' indicator
+
+The error appears to be in '/home/ec2-user/web.yml': line 10, column 5, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+         state: present
+    with_items:
+    ^ here
+
+2023-05-15 00:07:09,904 p=4072 u=ec2-user n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  found unexpected end of stream
+
+The error appears to be in '/home/ec2-user/web.yml': line 49, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+      debug:
+        msg: "website is accessible: {{ response.status == 200 }}
+^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2023-05-15 00:09:01,737 p=4079 u=ec2-user n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  found unexpected end of stream
+
+The error appears to be in '/home/ec2-user/web.yml': line 50, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+        msg:
+        - "website is accessible: {{ response.status == 200 }}
+^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2023-05-15 00:13:27,200 p=4146 u=ec2-user n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  found unexpected end of stream
+
+The error appears to be in '/home/ec2-user/web.yml': line 51, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+        msg:
+        - "website is accessible: {{ response.status == 200 }}
+^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2023-05-15 00:14:23,633 p=4153 u=ec2-user n=ansible | playbook: web.yml
+2023-05-15 00:18:06,030 p=4164 u=ec2-user n=ansible | playbook: web.yml
+2023-05-15 00:18:20,653 p=4170 u=ec2-user n=ansible | PLAY [qaserver] **********************************************************************************************************
+2023-05-15 00:18:20,669 p=4170 u=ec2-user n=ansible | TASK [Gathering Facts] ***************************************************************************************************
+2023-05-15 00:18:23,077 p=4170 u=ec2-user n=ansible | ok: [44.197.113.134]
+2023-05-15 00:18:23,111 p=4170 u=ec2-user n=ansible | TASK [install packages] **************************************************************************************************
+2023-05-15 00:18:24,724 p=4170 u=ec2-user n=ansible | ok: [44.197.113.134] => (item=unzip)
+2023-05-15 00:18:25,691 p=4170 u=ec2-user n=ansible | ok: [44.197.113.134] => (item=wget)
+2023-05-15 00:18:38,504 p=4170 u=ec2-user n=ansible | changed: [44.197.113.134] => (item=httpd)
+2023-05-15 00:18:38,520 p=4170 u=ec2-user n=ansible | TASK [download] **********************************************************************************************************
+2023-05-15 00:18:39,940 p=4170 u=ec2-user n=ansible | changed: [44.197.113.134]
+2023-05-15 00:18:39,952 p=4170 u=ec2-user n=ansible | TASK [extract web files] *************************************************************************************************
+2023-05-15 00:18:40,705 p=4170 u=ec2-user n=ansible | changed: [44.197.113.134]
+2023-05-15 00:18:40,728 p=4170 u=ec2-user n=ansible | TASK [copy website files to web server directory] ************************************************************************
+2023-05-15 00:18:41,153 p=4170 u=ec2-user n=ansible | fatal: [44.197.113.134]: FAILED! => {"changed": true, "cmd": ["cp", "-r", "/tmp/static-resume-main/iPortfolio/*", "/var/www/html/"], "delta": "0:00:00.065307", "end": "2023-05-15 00:18:41.109626", "msg": "non-zero return code", "rc": 1, "start": "2023-05-15 00:18:41.044319", "stderr": "cp: cannot stat ‘/tmp/static-resume-main/iPortfolio/*’: No such file or directory", "stderr_lines": ["cp: cannot stat ‘/tmp/static-resume-main/iPortfolio/*’: No such file or directory"], "stdout": "", "stdout_lines": []}
+2023-05-15 00:18:41,154 p=4170 u=ec2-user n=ansible | ...ignoring
+2023-05-15 00:18:41,166 p=4170 u=ec2-user n=ansible | TASK [starting the apache service] ***************************************************************************************
+2023-05-15 00:18:42,443 p=4170 u=ec2-user n=ansible | changed: [44.197.113.134]
+2023-05-15 00:18:42,457 p=4170 u=ec2-user n=ansible | TASK [Pause for web server to start] *************************************************************************************
+2023-05-15 00:18:42,479 p=4249 u=ec2-user n=ansible | Pausing for 10 seconds
+2023-05-15 00:18:42,479 p=4249 u=ec2-user n=ansible | (ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+2023-05-15 00:18:52,481 p=4170 u=ec2-user n=ansible | ok: [44.197.113.134]
+2023-05-15 00:18:52,495 p=4170 u=ec2-user n=ansible | TASK [Check if website is accessible] ************************************************************************************
+2023-05-15 00:18:53,876 p=4170 u=ec2-user n=ansible | fatal: [44.197.113.134]: FAILED! => {"accept_ranges": "bytes", "changed": false, "connection": "Upgrade, close", "content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">\n\t<head>\n\t\t<title>Test Page for the Apache HTTP Server</title>\n\t\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n\t\t<style type=\"text/css\">\n\t\t\t/*<![CDATA[*/\n\t\t\tbody {\n\t\t\t\tbackground-color: #fff;\n\t\t\t\tcolor: #000;\n\t\t\t\tfont-size: 0.9em;\n\t\t\t\tfont-family: sans-serif,helvetica;\n\t\t\t\tmargin: 0;\n\t\t\t\tpadding: 0;\n\t\t\t}\n\t\t\t:link {\n\t\t\t\tcolor: #c00;\n\t\t\t}\n\t\t\t:visited {\n\t\t\t\tcolor: #c00;\n\t\t\t}\n\t\t\ta:hover {\n\t\t\t\tcolor: #f50;\n\t\t\t}\n\t\t\th1 {\n\t\t\t\ttext-align: center;\n\t\t\t\tmargin: 0;\n\t\t\t\tpadding: 0.6em 2em 0.4em;\n\t\t\t\tbackground-color: #900;\n\t\t\t\tcolor: #fff;\n\t\t\t\tfont-weight: normal;\n\t\t\t\tfont-size: 1.75em;\n\t\t\t\tborder-bottom: 2px solid #000;\n\t\t\t}\n\t\t\th1 strong {\n\t\t\t\tfont-weight: bold;\n\t\t\t}\n\t\t\th2 {\n\t\t\t\tfont-size: 1.1em;\n\t\t\t\tfont-weight: bold;\n\t\t\t}\n\t\t\thr {\n\t\t\t\tdisplay: none;\n\t\t\t}\n\t\t\t.content {\n\t\t\t\tpadding: 1em 5em;\n\t\t\t}\n\t\t\t.content-columns {\n\t\t\t\t/* Setting relative positioning allows for \n\t\t\t\tabsolute positioning for sub-classes */\n\t\t\t\tposition: relative;\n\t\t\t\tpadding-top: 1em;\n\t\t\t}\n\t\t\t.content-column-left {\n\t\t\t\t/* Value for IE/Win; will be overwritten for other browsers */\n\t\t\t\twidth: 47%;\n\t\t\t\tpadding-right: 3%;\n\t\t\t\tfloat: left;\n\t\t\t\tpadding-bottom: 2em;\n\t\t\t}\n\t\t\t.content-column-left hr {\n\t\t\t\tdisplay: none;\n\t\t\t}\n\t\t\t.content-column-right {\n\t\t\t\t/* Values for IE/Win; will be overwritten for other browsers */\n\t\t\t\twidth: 47%;\n\t\t\t\tpadding-left: 3%;\n\t\t\t\tfloat: left;\n\t\t\t\tpadding-bottom: 2em;\n\t\t\t}\n\t\t\t.content-columns>.content-column-left, .content-columns>.content-column-right {\n\t\t\t\t/* Non-IE/Win */\n\t\t\t}\n\t\t\timg {\n\t\t\t\tborder: 2px solid #fff;\n\t\t\t\tpadding: 2px;\n\t\t\t\tmargin: 2px;\n\t\t\t}\n\t\t\ta:hover img {\n\t\t\t\tborder: 2px solid #f50;\n\t\t\t}\n\t\t\t/*]]>*/\n\t\t</style>\n\t</head>\n\n\t<body>\n\t\t<h1>Test Page</h1>\n\n\t\t<div class=\"content\">\n\t\t\t<div class=\"content-middle\">\n\t\t\t\t<p>This page is used to test the proper operation of the Apache HTTP server after it has been installed. If you can read this page, it means that the Apache HTTP server installed at this site is working properly.</p>\n\t\t\t</div>\n\t\t\t<hr />\n\n\t\t\t<div class=\"content-columns\">\n\t\t\t\t<div class=\"content-column-left\">\n\t\t\t\t\t<h2>If you are a member of the general public:</h2>\n\n\t\t\t\t\t<p>The fact that you are seeing this page indicates that the website you just visited is either experiencing problems, or is undergoing routine maintenance.</p>\n\n\t\t\t\t\t<p>If you would like to let the administrators of this website know that you've seen this page instead of the page you expected, you should send them e-mail. In general, mail sent to the name \"webmaster\" and directed to the website's domain should reach the appropriate person.</p>\n\n\t\t\t\t\t<p>For example, if you experienced problems while visiting www.example.com, you should send e-mail to \"webmaster@example.com\".</p>\n\n\t\t\t\t\t<hr />\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"content-column-right\">\n\t\t\t\t\t<h2>If you are the website administrator:</h2>\n\n\t\t\t\t\t<p>You may now add content to the directory <tt>/var/www/html/</tt>. Note that until you do so, people visiting your website will see this page, and not your content. To prevent this page from ever being used, follow the instructions in the file <tt>/etc/httpd/conf.d/welcome.conf</tt>.</p>\n\n                                        <p>You are free to use the image below on web sites powered by the Apache HTTP Server:</p>\n\t\t\t\t\t\n                                        <p align=\"center\"><a href=\"http://httpd.apache.org/\"><img src=\"/icons/apache_pb2.gif\" alt=\"[ Powered by Apache ]\"/></a></p>\n\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</body>\n</html>\n", "content_length": "3630", "content_type": "text/html; charset=UTF-8", "date": "Mon, 15 May 2023 00:18:53 GMT", "elapsed": 0, "etag": "\"e2e-5f70562cc3300\"", "last_modified": "Thu, 16 Mar 2023 14:36:28 GMT", "msg": "Status code was 403 and not [200]: HTTP Error 403: Forbidden", "redirected": false, "server": "Apache/2.4.56 ()", "status": 403, "upgrade": "h2,h2c", "url": "http://localhost/"}
+2023-05-15 00:18:53,876 p=4170 u=ec2-user n=ansible | ...ignoring
+2023-05-15 00:18:53,888 p=4170 u=ec2-user n=ansible | TASK [Display website access status] *************************************************************************************
+2023-05-15 00:18:53,914 p=4170 u=ec2-user n=ansible | ok: [44.197.113.134] => {
+    "msg": [
+        "website is accessible: False"
+    ]
+}
+2023-05-15 00:18:53,936 p=4170 u=ec2-user n=ansible | PLAY RECAP ***************************************************************************************************************
+2023-05-15 00:18:53,936 p=4170 u=ec2-user n=ansible | 44.197.113.134             : ok=9    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=2   

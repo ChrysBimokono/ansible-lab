@@ -7,11 +7,44 @@
       package:
          name: "{{ item }}"
          state: present
-    with_items:
+      loop:
       - unzip
       - wget
       - httpd
+
     - name: download
-      shell:
+      shell: wget https://github.com/utrains/static-resume/archive/refs/heads/main.zip
+      args:
+        executable: /bin/bash
+      become: True
 
+    - name: extract web files
+      command: "unzip main.zip -d /tmp"
+      become: True
 
+    - name: copy website files to web server directory
+      command: "cp -r /tmp/static-resume-main/iPortfolio/* /var/www/html/"
+      become: True
+
+    - name: starting the apache service
+      service:
+        name: httpd
+        state: started
+        enabled: true
+      become: True    
+           
+    - name: Pause for web server to start
+      pause:
+        seconds: 10
+
+    - name: Check if website is accessible
+      uri:
+        url: "http://localhost/"
+        return_content: yes
+      register: response
+
+    - name: Display website access status
+      debug:
+        msg:
+        - "website is accessible: {{ response.status == 200 }}"
+  
