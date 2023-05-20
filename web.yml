@@ -12,27 +12,26 @@
       - wget
       - httpd
 
-<<<<<<< HEAD
-    - name: download
-      shell: wget https://github.com/utrains/static-resume/archive/refs/heads/main.zip
-      args:
-        executable: /bin/bash
-      become: True
-=======
-    - name: Download and extract application files using get url
+
+    - name: Download and extract application files
       get_url:
         url: "https://github.com/utrains/static-resume/archive/refs/heads/main.zip"
         dest: "/tmp/main.zip"
       become: true
->>>>>>> 2c63e75 (updating my new web yml file)
 
-    - name: extract web files
-      command: "unzip main.zip -d /tmp"
-      become: True
+    - name: Extract files from compressed
+      unarchive:
+        src: "/tmp/main.zip"
+        dest: "/tmp"
+        remote_src: true
+      become: true
 
-    - name: copy website files to web server directory
-      command: "cp -r /tmp/static-resume-main/iPortfolio/* /var/www/html/"
-      become: True
+    - name: Copy application files to web server directory
+      copy:
+        src: "/tmp/static-resume-main/iPortfolio/"
+        dest: "/var/www/html/"
+        remote_src: true
+      become: true
 
     - name: starting the apache service
       service:
@@ -41,15 +40,9 @@
         enabled: true
       become: True    
            
-    - name: Pause for web server to start
-      pause:
-        seconds: 10
-
-    - name: Check if website is accessible
-      uri:
-        url: "http://localhost/"
-        return_content: yes
-      register: response
-
-  
-  
+    - name: Check if application is up
+      wait_for:
+        host: 44.201.19.223
+        port: 80
+        state: started
+      become: true
