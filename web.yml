@@ -12,11 +12,19 @@
       - wget
       - httpd
 
+<<<<<<< HEAD
     - name: download
       shell: wget https://github.com/utrains/static-resume/archive/refs/heads/main.zip
       args:
         executable: /bin/bash
       become: True
+=======
+    - name: Download and extract application files using get url
+      get_url:
+        url: "https://github.com/utrains/static-resume/archive/refs/heads/main.zip"
+        dest: "/tmp/main.zip"
+      become: true
+>>>>>>> 2c63e75 (updating my new web yml file)
 
     - name: extract web files
       command: "unzip main.zip -d /tmp"
