@@ -51,8 +51,5 @@
         return_content: yes
       register: response
 
-    - name: Display website access status
-      debug:
-        msg:
-        - "website is accessible: {{ response.status == 200 }}"
+  
   
