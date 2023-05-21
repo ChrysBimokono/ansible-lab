@@ -984,3 +984,203 @@ Should be written as:
 }
 2023-05-15 00:18:53,936 p=4170 u=ec2-user n=ansible | PLAY RECAP ***************************************************************************************************************
 2023-05-15 00:18:53,936 p=4170 u=ec2-user n=ansible | 44.197.113.134             : ok=9    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=2   
+<<<<<<< HEAD
+=======
+2023-05-21 20:10:45,397 p=3387 u=ec2-user n=ansible | 52.91.71.47 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2023-05-21 20:10:45,578 p=3387 u=ec2-user n=ansible | 3.83.21.205 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2023-05-21 20:41:51,554 p=1085 u=ec2-user n=ansible | ERROR! A playbook must be a list of plays, got a <class 'ansible.parsing.yaml.objects.AnsibleMapping'> instead
+
+The error appears to be in '/home/ec2-user/webrole.yml': line 2, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+---
+hosts: devserver
+^ here
+
+2023-05-21 20:43:06,049 p=1122 u=ec2-user n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  mapping values are not allowed in this context
+
+The error appears to be in '/home/ec2-user/roles/apache/tasks/main.yml': line 8, column 7, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+name: copy index file
+  copy:
+      ^ here
+
+2023-05-21 20:44:13,563 p=1157 u=ec2-user n=ansible | [WARNING]: While constructing a mapping from /home/ec2-user/roles/apache/tasks/main.yml, line 3,
+column 1, found a duplicate dict key (name). Using last defined value only.
+
+2023-05-21 20:44:13,564 p=1157 u=ec2-user n=ansible | ERROR! The tasks/main.yml file for role 'apache' must contain a list of tasks
+
+The error appears to be in '/home/ec2-user/roles/apache/tasks/main.yml': line 3, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+# tasks file for apache
+name: Install apache
+^ here
+
+2023-05-21 20:46:27,115 p=1190 u=ec2-user n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  did not find expected key
+
+The error appears to be in '/home/ec2-user/roles/apache/tasks/main.yml': line 11, column 5, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+     dest: "{{ dest_folder}}"
+    remote_src: no
+    ^ here
+
+2023-05-21 20:47:14,036 p=1216 u=ec2-user n=ansible | ERROR! The handlers/main.yml file for role 'apache' must contain a list of tasks
+
+The error appears to be in '/home/ec2-user/roles/apache/handlers/main.yml': line 3, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+# handlers file for apache
+name: restart apache
+^ here
+
+2023-05-21 20:47:39,317 p=1248 u=ec2-user n=ansible | PLAY [devserver] **************************************************************************************
+2023-05-21 20:47:39,333 p=1248 u=ec2-user n=ansible | TASK [Gathering Facts] ********************************************************************************
+2023-05-21 20:47:41,975 p=1248 u=ec2-user n=ansible | ok: [52.91.71.47]
+2023-05-21 20:47:42,008 p=1248 u=ec2-user n=ansible | TASK [apache : Install apache] ************************************************************************
+2023-05-21 20:47:43,864 p=1248 u=ec2-user n=ansible | changed: [52.91.71.47]
+2023-05-21 20:47:43,878 p=1248 u=ec2-user n=ansible | TASK [apache : copy index file] ***********************************************************************
+2023-05-21 20:47:44,065 p=1248 u=ec2-user n=ansible | An exception occurred during task execution. To see the full traceback, use -vvv. The error was: If you are using a module and expect the file to exist on the remote, see the remote_src option
+2023-05-21 20:47:44,066 p=1248 u=ec2-user n=ansible | fatal: [52.91.71.47]: FAILED! => {"changed": false, "msg": "Could not find or access 'file/index.html'\nSearched in:\n\t/home/ec2-user/roles/apache/files/file/index.html\n\t/home/ec2-user/roles/apache/file/index.html\n\t/home/ec2-user/roles/apache/tasks/files/file/index.html\n\t/home/ec2-user/roles/apache/tasks/file/index.html\n\t/home/ec2-user/files/file/index.html\n\t/home/ec2-user/file/index.html on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option"}
+2023-05-21 20:47:44,068 p=1248 u=ec2-user n=ansible | PLAY RECAP ********************************************************************************************
+2023-05-21 20:47:44,068 p=1248 u=ec2-user n=ansible | 52.91.71.47                : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-05-21 20:48:44,373 p=1322 u=ec2-user n=ansible | PLAY [devserver] **************************************************************************************
+2023-05-21 20:48:44,387 p=1322 u=ec2-user n=ansible | TASK [Gathering Facts] ********************************************************************************
+2023-05-21 20:48:46,400 p=1322 u=ec2-user n=ansible | ok: [52.91.71.47]
+2023-05-21 20:48:46,427 p=1322 u=ec2-user n=ansible | TASK [apache : Install apache] ************************************************************************
+2023-05-21 20:48:47,940 p=1322 u=ec2-user n=ansible | changed: [52.91.71.47]
+2023-05-21 20:48:47,952 p=1322 u=ec2-user n=ansible | TASK [apache : copy index file] ***********************************************************************
+2023-05-21 20:48:48,365 p=1322 u=ec2-user n=ansible | changed: [52.91.71.47]
+2023-05-21 20:48:48,414 p=1322 u=ec2-user n=ansible | RUNNING HANDLER [apache : restart apache] *************************************************************
+2023-05-21 20:48:49,304 p=1322 u=ec2-user n=ansible | fatal: [52.91.71.47]: FAILED! => {"changed": false, "msg": "Could not find the requested service httpd: host"}
+2023-05-21 20:48:49,304 p=1322 u=ec2-user n=ansible | NO MORE HOSTS LEFT ************************************************************************************
+2023-05-21 20:48:49,307 p=1322 u=ec2-user n=ansible | PLAY RECAP ********************************************************************************************
+2023-05-21 20:48:49,307 p=1322 u=ec2-user n=ansible | 52.91.71.47                : ok=3    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-05-21 20:50:15,197 p=1435 u=ec2-user n=ansible | 52.91.71.47 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2023-05-21 20:51:37,754 p=1486 u=ec2-user n=ansible | PLAY [devserver] **************************************************************************************
+2023-05-21 20:51:37,770 p=1486 u=ec2-user n=ansible | TASK [Gathering Facts] ********************************************************************************
+2023-05-21 20:51:39,705 p=1486 u=ec2-user n=ansible | ok: [52.91.71.47]
+2023-05-21 20:51:39,737 p=1486 u=ec2-user n=ansible | TASK [apache : Install apache] ************************************************************************
+2023-05-21 20:51:41,235 p=1486 u=ec2-user n=ansible | changed: [52.91.71.47]
+2023-05-21 20:51:41,249 p=1486 u=ec2-user n=ansible | TASK [apache : copy index file] ***********************************************************************
+2023-05-21 20:51:41,623 p=1486 u=ec2-user n=ansible | changed: [52.91.71.47]
+2023-05-21 20:51:41,654 p=1486 u=ec2-user n=ansible | RUNNING HANDLER [apache : restart apache] *************************************************************
+2023-05-21 20:51:42,351 p=1486 u=ec2-user n=ansible | fatal: [52.91.71.47]: FAILED! => {"changed": false, "msg": "Could not find the requested service httpd: host"}
+2023-05-21 20:51:42,352 p=1486 u=ec2-user n=ansible | NO MORE HOSTS LEFT ************************************************************************************
+2023-05-21 20:51:42,354 p=1486 u=ec2-user n=ansible | PLAY RECAP ********************************************************************************************
+2023-05-21 20:51:42,354 p=1486 u=ec2-user n=ansible | 52.91.71.47                : ok=3    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-05-21 21:00:32,762 p=1712 u=ec2-user n=ansible | PLAY [qaserver] ***************************************************************************************
+2023-05-21 21:00:32,778 p=1712 u=ec2-user n=ansible | TASK [Gathering Facts] ********************************************************************************
+2023-05-21 21:00:35,289 p=1712 u=ec2-user n=ansible | ok: [3.83.21.205]
+2023-05-21 21:00:35,312 p=1712 u=ec2-user n=ansible | TASK [apache : Install apache] ************************************************************************
+2023-05-21 21:00:37,021 p=1712 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:00:37,034 p=1712 u=ec2-user n=ansible | TASK [apache : copy index file] ***********************************************************************
+2023-05-21 21:00:37,559 p=1712 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:00:37,583 p=1712 u=ec2-user n=ansible | RUNNING HANDLER [apache : restart apache] *************************************************************
+2023-05-21 21:00:38,442 p=1712 u=ec2-user n=ansible | fatal: [3.83.21.205]: FAILED! => {"changed": false, "msg": "Could not find the requested service httpd: host"}
+2023-05-21 21:00:38,443 p=1712 u=ec2-user n=ansible | NO MORE HOSTS LEFT ************************************************************************************
+2023-05-21 21:00:38,444 p=1712 u=ec2-user n=ansible | PLAY RECAP ********************************************************************************************
+2023-05-21 21:00:38,444 p=1712 u=ec2-user n=ansible | 3.83.21.205                : ok=3    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-05-21 21:01:28,592 p=1829 u=ec2-user n=ansible | Starting galaxy role install process
+2023-05-21 21:01:28,592 p=1829 u=ec2-user n=ansible | - downloading role 'java', owned by geerlingguy
+2023-05-21 21:01:28,816 p=1829 u=ec2-user n=ansible | - downloading role from https://github.com/geerlingguy/ansible-role-java/archive/2.3.0.tar.gz
+2023-05-21 21:01:28,962 p=1829 u=ec2-user n=ansible | - extracting geerlingguy.java to /home/ec2-user/roles/geerlingguy.java
+2023-05-21 21:01:28,968 p=1829 u=ec2-user n=ansible | - geerlingguy.java (2.3.0) was installed successfully
+2023-05-21 21:20:51,198 p=2078 u=ec2-user n=ansible | PLAY [qaserver] ****************************************************************
+2023-05-21 21:20:51,212 p=2078 u=ec2-user n=ansible | TASK [Gathering Facts] *********************************************************
+2023-05-21 21:20:53,492 p=2078 u=ec2-user n=ansible | ok: [3.83.21.205]
+2023-05-21 21:20:53,515 p=2078 u=ec2-user n=ansible | TASK [apache : Install apache] *************************************************
+2023-05-21 21:20:55,020 p=2078 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:20:55,032 p=2078 u=ec2-user n=ansible | TASK [apache : copy index file] ************************************************
+2023-05-21 21:20:55,473 p=2078 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:20:55,511 p=2078 u=ec2-user n=ansible | RUNNING HANDLER [apache : start apache] ****************************************
+2023-05-21 21:20:56,267 p=2078 u=ec2-user n=ansible | fatal: [3.83.21.205]: FAILED! => {"changed": false, "msg": "Could not find the requested service httpd: host"}
+2023-05-21 21:20:56,269 p=2078 u=ec2-user n=ansible | NO MORE HOSTS LEFT *************************************************************
+2023-05-21 21:20:56,270 p=2078 u=ec2-user n=ansible | PLAY RECAP *********************************************************************
+2023-05-21 21:20:56,271 p=2078 u=ec2-user n=ansible | 3.83.21.205                : ok=3    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-05-21 21:25:50,102 p=2173 u=ec2-user n=ansible | PLAY [qaserver] ****************************************************************
+2023-05-21 21:25:50,118 p=2173 u=ec2-user n=ansible | TASK [Gathering Facts] *********************************************************
+2023-05-21 21:25:52,058 p=2173 u=ec2-user n=ansible | ok: [3.83.21.205]
+2023-05-21 21:25:52,084 p=2173 u=ec2-user n=ansible | TASK [apache : Install apache] *************************************************
+2023-05-21 21:25:53,591 p=2173 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:25:53,603 p=2173 u=ec2-user n=ansible | TASK [apache : copy index file] ************************************************
+2023-05-21 21:25:54,014 p=2173 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:25:54,037 p=2173 u=ec2-user n=ansible | RUNNING HANDLER [apache : start apache] ****************************************
+2023-05-21 21:25:54,691 p=2173 u=ec2-user n=ansible | fatal: [3.83.21.205]: FAILED! => {"changed": false, "msg": "Could not find the requested service httpd: host"}
+2023-05-21 21:25:54,692 p=2173 u=ec2-user n=ansible | NO MORE HOSTS LEFT *************************************************************
+2023-05-21 21:25:54,693 p=2173 u=ec2-user n=ansible | PLAY RECAP *********************************************************************
+2023-05-21 21:25:54,693 p=2173 u=ec2-user n=ansible | 3.83.21.205                : ok=3    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-05-21 21:28:15,335 p=2325 u=ec2-user n=ansible | PLAY [qaserver] ****************************************************************
+2023-05-21 21:28:15,349 p=2325 u=ec2-user n=ansible | TASK [Gathering Facts] *********************************************************
+2023-05-21 21:28:17,380 p=2325 u=ec2-user n=ansible | ok: [3.83.21.205]
+2023-05-21 21:28:17,407 p=2325 u=ec2-user n=ansible | TASK [apache : Install apache] *************************************************
+2023-05-21 21:28:18,992 p=2325 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:28:19,004 p=2325 u=ec2-user n=ansible | TASK [apache : copy index file] ************************************************
+2023-05-21 21:28:19,380 p=2325 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:28:19,402 p=2325 u=ec2-user n=ansible | RUNNING HANDLER [apache : restart apache] **************************************
+2023-05-21 21:28:20,061 p=2325 u=ec2-user n=ansible | fatal: [3.83.21.205]: FAILED! => {"changed": false, "msg": "Could not find the requested service httpd: host"}
+2023-05-21 21:28:20,062 p=2325 u=ec2-user n=ansible | NO MORE HOSTS LEFT *************************************************************
+2023-05-21 21:28:20,064 p=2325 u=ec2-user n=ansible | PLAY RECAP *********************************************************************
+2023-05-21 21:28:20,064 p=2325 u=ec2-user n=ansible | 3.83.21.205                : ok=3    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-05-21 21:37:05,919 p=2548 u=ec2-user n=ansible | PLAY [qaserver] *****************************************************************************************************
+2023-05-21 21:37:05,933 p=2548 u=ec2-user n=ansible | TASK [Gathering Facts] **********************************************************************************************
+2023-05-21 21:37:07,991 p=2548 u=ec2-user n=ansible | ok: [3.83.21.205]
+2023-05-21 21:37:08,013 p=2548 u=ec2-user n=ansible | TASK [apache : Install apache] **************************************************************************************
+2023-05-21 21:37:09,564 p=2548 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:37:09,577 p=2548 u=ec2-user n=ansible | TASK [apache : copy index file] *************************************************************************************
+2023-05-21 21:37:09,960 p=2548 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:37:09,982 p=2548 u=ec2-user n=ansible | RUNNING HANDLER [apache : restart apache] ***************************************************************************
+2023-05-21 21:37:10,713 p=2548 u=ec2-user n=ansible | fatal: [3.83.21.205]: FAILED! => {"changed": false, "msg": "Could not find the requested service httpd: host"}
+2023-05-21 21:37:10,714 p=2548 u=ec2-user n=ansible | NO MORE HOSTS LEFT **************************************************************************************************
+2023-05-21 21:37:10,716 p=2548 u=ec2-user n=ansible | PLAY RECAP **********************************************************************************************************
+2023-05-21 21:37:10,717 p=2548 u=ec2-user n=ansible | 3.83.21.205                : ok=3    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-05-21 21:38:28,980 p=2671 u=ec2-user n=ansible | PLAY [qaserver] *****************************************************************************************************
+2023-05-21 21:38:28,996 p=2671 u=ec2-user n=ansible | TASK [Gathering Facts] **********************************************************************************************
+2023-05-21 21:38:30,937 p=2671 u=ec2-user n=ansible | ok: [3.83.21.205]
+2023-05-21 21:38:30,960 p=2671 u=ec2-user n=ansible | TASK [apache : Install apache] **************************************************************************************
+2023-05-21 21:38:34,839 p=2671 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:38:34,903 p=2671 u=ec2-user n=ansible | TASK [apache : copy index file] *************************************************************************************
+2023-05-21 21:38:36,296 p=2671 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:38:36,338 p=2671 u=ec2-user n=ansible | RUNNING HANDLER [apache : restart apache] ***************************************************************************
+2023-05-21 21:38:37,260 p=2671 u=ec2-user n=ansible | changed: [3.83.21.205]
+2023-05-21 21:38:37,274 p=2671 u=ec2-user n=ansible | PLAY RECAP **********************************************************************************************************
+2023-05-21 21:38:37,274 p=2671 u=ec2-user n=ansible | 3.83.21.205                : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+>>>>>>> a041246 ( created roles and updated web yml)
