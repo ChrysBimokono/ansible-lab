@@ -6,7 +6,7 @@
     username: chrys
     pkg_name: httpd
   tasks:
-    - name: Creating user
+    - name: Creating new user
       user:
         name: "{{ username }}"
         comment: chrys bimokono
