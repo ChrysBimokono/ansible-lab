@@ -12,7 +12,7 @@
         comment: chrys bimokono
         shell: /bin/bash
           #when: ansible_os_family == "Debian"
-    - name: Create file
+    - name: Create file name
       file:
         path: /tmp/ansiblr.txt
         state: touch
